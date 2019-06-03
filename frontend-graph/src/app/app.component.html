@@ -1,0 +1,56 @@
+<div class="uk-child-width-expand@s uk-text-center uk-margin-top uk-margin-left uk-margin-right" uk-grid>
+  <div class="uk-width-3-5@m">
+    <p class="uk-text-lead"> <span uk-icon="icon: table; ratio: 1"></span> Objetos</p>
+    <div class="uk-card uk-card-default uk-card-body">
+      <table class="uk-table uk-table-striped">
+        <caption></caption>
+        <thead>
+          <tr>
+            <th class="uk-text-center">id</th>
+            <th class="uk-text-center">nombre</th>
+            <th class="uk-text-center">descripción</th>
+            <th class="uk-text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let product of products'>
+            <td>{{product.id}}</td>
+            <td>{{product.name}}</td>
+            <td>{{product.description}}</td>
+            <td class="uk-button-group">
+              <button class="uk-button uk-button-default" type="button" (click)='setUpdate(product)'>Modificar</button>
+              <button class="uk-button uk-button-danger" type="button" (click)='delete(product.id)'>Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div>
+    <p class="uk-text-lead"> <span uk-icon="icon: plus; ratio: 1"></span> Nuevo</p>
+    <form [formGroup]= 'formCreateElement' class="uk-card uk-card-default uk-card-body uk-form-stacked">
+
+      <div class="uk-margin">
+        <label class="uk-form-label" for="form-stacked-text">Nombre</label>
+        <div class="uk-inline uk-width-1-1">
+          <a class="uk-form-icon" href="#" uk-icon="icon: pencil"></a>
+          <input formControlName='name' class="uk-input" type="text" placeholder="Nombre...">
+        </div>
+      </div>
+
+      <div class="uk-margin">
+        <label class="uk-form-label" for="form-stacked-text">Descripción</label>
+        <div class="uk-inline uk-width-1-1">
+          <a class="uk-form-icon" href="#" uk-icon="icon: info"></a>
+          <input formControlName='description' class="uk-input" type="text" placeholder="Descripción...">
+        </div>
+      </div>
+
+      <button *ngIf='isUpdate' type="submit" class="uk-button uk-button-primary" (click)='updateElement()'>Actualizar</button>
+      <button *ngIf='isUpdate' class="uk-button uk-button-danger" (click)='cancelUpdate()'>Cancelar</button>
+      <button *ngIf='!isUpdate' type="submit" class="uk-button uk-button-primary" (click)='createNew()'>Crear</button>
+    </form>
+  </div>
+</div>
+<router-outlet></router-outlet>
